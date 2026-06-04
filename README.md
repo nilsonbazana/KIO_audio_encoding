@@ -1,7 +1,7 @@
 cat << 'EOF' > README.md
 # Audio Encoding Pipelines for Dolphin Service Menus
 
-This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
+This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats (lossyWAV _-high_ or QAAC TVBR Q91) - while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
 
 ---
 
@@ -23,7 +23,7 @@ This project integrates custom audio encoding pipelines directly into the Dolphi
 * **Target Binaries:** `lossyWAV.exe` & `flac.exe` (via Wine)
 * **Behavior:** Decodes native FLAC on-the-fly, passes the PCM stream to lossyWAV for pre-bit reduction processing, recompiles the output to standard FLAC format, and clones the original Vorbis comments.
 
-### 2. QAAC + M4A
+### 2. QAAC (.m4a files)
 * **Target Binary:** `qaac64.exe` (via Wine)
 * **Behavior:** Decodes native FLAC on-the-fly, pipes the stream into the Apple AAC encoder at True VBR quality (`-V 91`), and exports compliant `.m4a` audio files.
 
