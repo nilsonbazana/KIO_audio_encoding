@@ -45,7 +45,8 @@ Modern KDE Plasma environments require user-space context menu configurations to
 kbuildsycoca5 --noincremental
 ```
 
-### 4. Right-click any FLAC file(s) to encode to chose format. Taht will create a subfolder (in the source folder) with the structure /%album artist%/%date%-%album% - ready to copy to, in my own case, my music collection in /mnt/share/THE MUSIC COLLECTION/[folders (grouping files mostly by the Album Artist's initial) /A-D, /E-J, /K-O, /P-S, /T-Z and /z_CLASSICAL or /z_Soundtracks & Original Scores
+### 4. Right-click any FLAC file(s) to encode to chose format. 
+That will create a subfolder (in the source folder) with the structure /%album artist%/%date%-%album% - ready to copy to, in my own case, my music collection in /mnt/share/THE MUSIC COLLECTION/[folders (grouping files mostly by the Album Artist's initial) /A-D, /E-J, /K-O, /P-S, /T-Z and /z_CLASSICAL or /z_Soundtracks & Original Scores
 
 
 
