@@ -1,6 +1,6 @@
 # Audio Encoding Pipelines for Dolphin Service Menus
 
-This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats (lossyWAV _-high_ or QAAC TVBR Q91) - while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
+This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu, via KDE Service Menus (or KIO Service Menus), for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats (lossyWAV _-high_ or QAAC TVBR Q91) - while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
 
 ---
 
@@ -34,3 +34,18 @@ This project integrates custom audio encoding pipelines directly into the Dolphi
 Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
 ```bash
 mkdir -p ~/.local/share/kio/servicemenus/
+```
+
+### 2. Run all the content from the chosen .desktop file in Bash
+Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
+
+### 3. Run the configuration cache rebuild command to apply the changes (the creation of the new .desktop file) to Dolphin.
+Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
+```bash
+kbuildsycoca5 --noincremental
+```
+
+### 4. Right-click any FLAC file(s) to encode to chose format. Taht will create a subfolder (in the source folder) with the structure /%album artist%/%date%-%album% - ready to copy to, in my own case, my music collection in /mnt/share/THE MUSIC COLLECTION/[folders (grouping files mostly by the Album Artist's initial) /A-D, /E-J, /K-O, /P-S, /T-Z and /z_CLASSICAL or /z_Soundtracks & Original Scores
+
+
+
