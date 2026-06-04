@@ -40,13 +40,13 @@ mkdir -p ~/.local/share/kio/servicemenus/
 ### 2. Run all the content from the chosen .desktop file in Bash
 Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
 
-### 3. Run the configuration cache rebuild command to apply the changes (the creation of the new .desktop file) to Dolphin.
+### 3. Run the configuration cache rebuild command to apply the changes (the creation of the new .desktop file) to Dolphin
 Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
 ```bash
 kbuildsycoca5 --noincremental
 ```
 
-### 4. Right-click any FLAC file(s) to encode to chose format. 
+### 4. Right-click any FLAC file(s) to encode to format of choice 
 That will create a subfolder (in the source folder) with the structure /%album artist%/%date%-%album% - ready to be moved to, in my own case, my music collection in /mnt/share/THE MUSIC COLLECTION/[folders (grouping files mostly by the Album Artist's first initial): /A-D, /E-J, /K-O, /P-S, /T-Z and /z_CLASSICAL or /z_Soundtracks & Original Scores
 
 
