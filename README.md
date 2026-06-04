@@ -51,7 +51,7 @@ That will create a subfolder (in the source folder) with the structure /%album a
 
 
 
-How do these *nix .desktop files compare to shell scripts? 
+## ℹ️ How do these *nix .desktop files compare to shell scripts? 
 
 A .desktop file is not a script.** Instead, it is a **declarative configuration file**.
 To understand the difference, it helps to look at what each one actually does under the hood.
