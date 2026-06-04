@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # Audio Encoding Pipelines for Dolphin Service Menus
 
 This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats (lossyWAV _-high_ or QAAC TVBR Q91) - while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
