@@ -18,3 +18,21 @@ This project integrates a custom audio encoding pipeline directly into the Dolph
 Modern KDE Plasma versions require user-specific context menus to reside in the KIO data path rather than legacy `kservices5` locations.
 ```bash
 mkdir -p ~/.local/share/kio/servicemenus/
+### 2. Copy and run the command in the command file above on bash
+
+### 2. Deploy the Service Menu Configuration
+
+Create the .desktop file inside the service menu directory with your specific execution parameters.
+### 3. Set Execution Permissions
+
+Ensure the desktop configuration file is marked as executable so Dolphin can parse and run its embedded actions.
+Bash
+
+chmod +x ~/.local/share/kio/servicemenus/lossywav_encoder.desktop
+
+### 4. Rebuild the Desktop Configuration Cache
+
+Force KDE Plasma to parse the new configuration immediately without requiring a logout or desktop restart.
+Bash
+
+kbuildsycoca5 --noincremental
