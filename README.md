@@ -1,38 +1,37 @@
 cat << 'EOF' > README.md
-# lossyWAV + FLAC Dolphin Service Menu Integration
+# Audio Encoding Pipelines for Dolphin Service Menus
 
-This project integrates a custom audio encoding pipeline directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It allows right-clicking one or multiple `.flac` files to convert them to lossyWAV-reduced FLAC files while preserving all original metadata tags.
+This project integrates custom audio encoding pipelines directly into the Dolphin File Manager context menu for Kubuntu 24.04 LTS running KDE Plasma 5.27.12[cite: 1]. It enables right-click, batch-processing automation to compress `.flac` files into high-efficiency formats while automatically generating structured relative directories based on embedded metadata tags (`/%album artist%/%date%-%album%/`).
 
-## Architecture & Requirements
-* **Operating System**: Kubuntu 24.04 LTS[cite: 1]
-* **Desktop Environment**: KDE Plasma 5.27.12 (using the modern `kio/servicemenus` pathway)[cite: 1]
-* **Dependencies**: 
-  * `wine` (to execute the Windows binaries `lossyWAV.exe` and `flac.exe`)
-  * `flac` (native Linux CLI utility for decoding)
-  * `metaflac` (native Linux CLI utility for tag preservation)
-  * `konsole` (KDE terminal emulator to host the process visual queue)[cite: 1]
+---
 
-## Step-by-Step Deployment Sequence
+## 🛠️ Architecture & Requirements
+
+* **Operating System:** Kubuntu 24.04 LTS[cite: 1]
+* **Desktop Environment:** KDE Plasma 5.27.12 (utilizing the modern `kio/servicemenus` pathway)[cite: 1]
+* **Dependencies:**
+  * `wine` (to execute Windows binaries `lossyWAV.exe`, `flac.exe`, and `qaac64.exe`)
+  * `flac` (native Linux CLI utility for stream decoding)
+  * `metaflac` (native Linux CLI utility for metadata tag extraction and injection)
+  * `konsole` (KDE terminal emulator utilized for tracking pipeline execution output)[cite: 1]
+
+---
+
+## 📦 Integrated Pipelines
+
+### 1. lossyWAV + FLAC
+* **Target Binaries:** `lossyWAV.exe` & `flac.exe` (via Wine)
+* **Behavior:** Decodes native FLAC on-the-fly, passes the PCM stream to lossyWAV for pre-bit reduction processing, recompiles the output to standard FLAC format, and clones the original Vorbis comments.
+
+### 2. QAAC + M4A
+* **Target Binary:** `qaac64.exe` (via Wine)
+* **Behavior:** Decodes native FLAC on-the-fly, pipes the stream into the Apple AAC encoder at True VBR quality (`-V 91`), and exports compliant `.m4a` audio files.
+
+---
+
+## 🚀 Step-by-Step Deployment Sequence
 
 ### 1. Create the Service Menu Directory
-Modern KDE Plasma versions require user-specific context menus to reside in the KIO data path rather than legacy `kservices5` locations.
+Modern KDE Plasma environments require user-space context menu configurations to reside in the KIO data path rather than legacy paths.
 ```bash
 mkdir -p ~/.local/share/kio/servicemenus/
-### 2. Copy and run the command in the command file above on bash
-
-### 2. Deploy the Service Menu Configuration
-
-Create the .desktop file inside the service menu directory with your specific execution parameters.
-### 3. Set Execution Permissions
-
-Ensure the desktop configuration file is marked as executable so Dolphin can parse and run its embedded actions.
-Bash
-
-chmod +x ~/.local/share/kio/servicemenus/lossywav_encoder.desktop
-
-### 4. Rebuild the Desktop Configuration Cache
-
-Force KDE Plasma to parse the new configuration immediately without requiring a logout or desktop restart.
-Bash
-
-kbuildsycoca5 --noincremental
