@@ -1,3 +1,4 @@
+cat << 'INPUT_EOF' > ~/.local/share/kio/servicemenus/qaac_encoder.desktop
 [Desktop Entry]
 Type=Service
 MimeType=audio/x-flac;audio/flac;
@@ -6,6 +7,7 @@ X-KDE-Priority=TopLevel
 X-KDE-Submenu=Audio Tools
 
 [Desktop Action qaacConvert]
-Name=Compress to QAAC + M4A
+Name=QAAC encoding
 Icon=audio-x-generic
-Exec=konsole -e bash -c 'ENCODER_DIR="/mnt/shared/THE MUSIC COLLECTION/_CODECS/QAAC - all necessary files"; cd "$ENCODER_DIR" || exit; for f in "$@"; do base_dir=$(dirname "$f"); artist=$(metaflac --show-tag=ALBUMARTIST "$f" | cut -d= -f2); [ -z "$artist" ] && artist=$(metaflac --show-tag=ARTIST "$f" | cut -d= -f2); date=$(metaflac --show-tag=DATE "$f" | cut -d= -f2); album=$(metaflac --show-tag=ALBUM "$f" | cut -d= -f2); [ -z "$artist" ] && artist="Unknown Artist"; [ -z "$date" ] && date="Unknown Date"; [ -z "$album" ] && album="Unknown Album"; target_dir="$base_dir/$artist/$date-$album"; mkdir -p "$target_dir"; out="$target_dir/$(basename "${f%.*}.m4a")"; flac -d -c "$f" | wine qaac64.exe -V 91 --no-delay --ignorelength -o "$out" -; done' _ %F
+Exec=konsole -e bash -c 'ENCODER_DIR="/mnt/shared/THE MUSIC COLLECTION/_CODECS/QAAC - all necessary files"; cd "$ENCODER_DIR" || exit; for f in "$@"; do [ ! -f "$f" ] && continue; base_dir=$(dirname "$f"); clean_name=$(basename "${f%.*}" | tr -d "[:cntrl:]:\\\\*?\\\"<>|"); artist=$(metaflac --show-tag=ALBUMARTIST "$f" | cut -d= -f2); [ -z "$artist" ] && artist=$(metaflac --show-tag=ARTIST "$f" | cut -d= -f2); date=$(metaflac --show-tag=DATE "$f" | cut -d= -f2); album=$(metaflac --show-tag=ALBUM "$f" | cut -d= -f2); title=$(metaflac --show-tag=TITLE "$f" | cut -d= -f2); tracknum=$(metaflac --show-tag=TRACKNUMBER "$f" | cut -d= -f2); genre=$(metaflac --show-tag=GENRE "$f" | cut -d= -f2); comment=$(metaflac --show-tag=COMMENT "$f" | cut -d= -f2); [ -z "$artist" ] && artist="Unknown Artist"; [ -z "$date" ] && date="Unknown Date"; [ -z "$album" ] && album="Unknown Album"; [ -z "$title" ] && title="${clean_name}"; target_dir="$base_dir/$artist/$date-$album"; mkdir -p "$target_dir"; out="$target_dir/${clean_name}.m4a"; echo "Encoding to M4A: $(basename "$f")"; flac -d -c "$f" 2>/dev/null | wine qaac64.exe -V 91 --no-delay --ignorelength --artist "$artist" --album "$album" --title "$title" --track "$tracknum" --date "$date" --genre "$genre" --comment "$comment" -o "$out" -; if [ $? -eq 0 ] && [ -f "$out" ]; then echo "$(tput bold; tput setaf 2)Successfully compressed with Tags: ${clean_name}.m4a$(tput sgr0)"; echo ""; else echo "$(tput bold; tput setaf 1)ERROR: QAAC encoding failed for $(basename "$f")$(tput sgr0)"; echo ""; fi; done; echo "---------------------------------------"; read -p "Processing complete. Press Enter to close..." temp' _ %F
+INPUT_EOF
